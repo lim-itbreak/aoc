@@ -33,25 +33,30 @@ def score(board: list[int]) -> int:
     return sum(filter(lambda n: n != -1, board))
 
 
-def part1(inputs: Input) -> int:
+def play(inputs: Input) -> int:
     numbers, boards = inputs
-    winner: int = 0
+    won: list[int] = []
+    scores: list[int] = []
     for number in numbers:
-        for board in boards:
-            if number in board:
-                board[board.index(number)] = -1
-                if check(board):
-                    winner: int = max(winner, score(board) * number)
-        if winner:
-            break
-    return winner
+        for i in range(len(boards)):
+            if i not in won:
+                board = boards[i]
+                if number in board:
+                    board[board.index(number)] = -1
+                    if check(board):
+                        won.append(i)
+                        scores.append(score(board) * number)
+    return scores
+
+
+def part1(inputs: Input) -> int:
+    return play(inputs)[0]
 
 
 def part2(inputs: Input) -> int:
-    return 0
+    return play(inputs)[-1]
 
 
 if __name__ == "__main__":
-    inputs: Input = load_input("input")
-    print(f"Day 4 Part 1 Answer: {part1(inputs)}")
-    print(f"Day 4 Part 2 Answer: {part2(inputs)}")
+    print(f"Day 4 Part 1 Answer: {part1(load_input('input'))}")
+    print(f"Day 4 Part 2 Answer: {part2(load_input('input'))}")
