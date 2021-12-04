@@ -1,6 +1,3 @@
-import math
-
-
 Input = tuple[list[int], list[list[int]]]
 
 
@@ -22,8 +19,13 @@ def load_input(filename: str = "example") -> Input:
 
 def check(board: list[int]) -> bool:
     size: int = 5
+    win: list[int] = size * [-1]
     if board.count(-1) >= size:
-        pass
+        for i in range(size):
+            if board[size * i : size * (i + 1)] == win:
+                return True
+            elif board[i::size] == win:
+                return True
     return False
 
 
