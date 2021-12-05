@@ -34,7 +34,8 @@ def score(board: list[int]) -> int:
 
 
 def play(inputs: Input) -> int:
-    numbers, boards = inputs
+    numbers: list[int] = inputs[0]
+    boards: list[list[int]] = inputs[1]
     won: list[int] = []
     scores: list[int] = []
     for number in numbers:
@@ -58,5 +59,5 @@ def part2(inputs: Input) -> int:
 
 
 if __name__ == "__main__":
-    print(f"Day 4 Part 1 Answer: {part1(load_input('input'))}")
-    print(f"Day 4 Part 2 Answer: {part2(load_input('input'))}")
+    print(f"Part 1 Answer: {part1(load_input('input'))}")
+    print(f"Part 2 Answer: {part2(load_input('input'))}")

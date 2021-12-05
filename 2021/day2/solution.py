@@ -41,5 +41,5 @@ def part2(inputs: Input) -> int:
 
 if __name__ == "__main__":
     inputs: Input = load_input("input")
-    print(f"Day 2 Part 1 Answer: {part1(inputs)}")
-    print(f"Day 2 Part 2 Answer: {part2(inputs)}")
+    print(f"Part 1 Answer: {part1(inputs)}")
+    print(f"Part 2 Answer: {part2(inputs)}")

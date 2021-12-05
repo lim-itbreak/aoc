@@ -3,6 +3,7 @@ from functools import partial
 
 
 Input = list[str]
+Common = list[tuple[str, int]]
 
 
 def load_input(filename: str = "example") -> Input:
@@ -10,22 +11,18 @@ def load_input(filename: str = "example") -> Input:
         return [line.strip() for line in fp]
 
 
-def bit_counter(inputs: Input, pos: int) -> Counter:
+def bit_counter(inputs: Input, pos: int) -> Common:
     return Counter((bin[pos] for bin in inputs)).most_common()
 
 
 def most_common_bit(inputs: Input, pos: int) -> str:
-    counter: Counter = bit_counter(inputs, pos)
-    if len(counter) > 1 and counter[0][1] == counter[1][1]:
-        return max(counter[0][0], counter[1][0])
-    return bit_counter(inputs, pos)[0][0]
+    counts: Common = bit_counter(inputs, pos)
+    return "1" if len(counts) == 2 and counts[0][1] == counts[1][1] else counts[0][0]
 
 
 def least_common_bit(inputs: Input, pos: int) -> str:
-    counter: Counter = bit_counter(inputs, pos)
-    if len(counter) > 1 and counter[-1][1] == counter[-2][1]:
-        return min(counter[-1][0], counter[-2][0])
-    return bit_counter(inputs, pos)[-1][0]
+    counts: Common = bit_counter(inputs, pos)
+    return "0" if len(counts) == 2 and counts[0][1] == counts[1][1] else counts[-1][0]
 
 
 def gamma(inputs: Input) -> int:
@@ -70,5 +67,5 @@ def part2(inputs: Input) -> int:
 
 if __name__ == "__main__":
     inputs: Input = load_input("input")
-    print(f"Day 3 Part 1 Answer: {part1(inputs)}")
-    print(f"Day 3 Part 2 Answer: {part2(inputs)}")
+    print(f"Part 1 Answer: {part1(inputs)}")
+    print(f"Part 2 Answer: {part2(inputs)}")

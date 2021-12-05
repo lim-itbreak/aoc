@@ -17,9 +17,10 @@ def part1(inputs: Input) -> int:
 
 
 def part2(inputs: Input):
+    size: int = 3
     count: int = 0
-    for i in range(len(inputs) - 2):
-        window: int = inputs[i] + inputs[i + 1] + inputs[i + 2]
+    for i in range(len(inputs) - (size - 1)):
+        window: int = sum(inputs[i : i + size])
         if i != 0:
             if window > previous:
                 count += 1
@@ -29,5 +30,5 @@ def part2(inputs: Input):
 
 if __name__ == "__main__":
     inputs: Input = load_input("input")
-    print(f"Day 1 Part 1 Answer: {part1(inputs)}")
-    print(f"Day 1 Part 2 Answer: {part2(inputs)}")
+    print(f"Part 1 Answer: {part1(inputs)}")
+    print(f"Part 2 Answer: {part2(inputs)}")
