@@ -1,7 +1,6 @@
 from collections import Counter
 from functools import partial
 
-
 Input = list[str]
 Common = list[tuple[str, int]]
 

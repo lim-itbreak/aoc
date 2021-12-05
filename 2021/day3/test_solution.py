@@ -19,6 +19,21 @@ def test_load_input() -> None:
     assert load_input() == expected
 
 
+def test_bit_counter() -> None:
+    expected: Common = [("1", 7), ("0", 5)]
+    assert bit_counter(load_input(), 0) == expected
+
+
+def test_most_common_bit() -> None:
+    expected: str = "1"
+    assert most_common_bit(load_input(), 0) == expected
+
+
+def test_least_common_bit() -> None:
+    expected: str = "0"
+    assert least_common_bit(load_input(), 0) == expected
+
+
 def test_gamma() -> None:
     expected: int = 22
     assert gamma(load_input()) == expected
@@ -27,6 +42,11 @@ def test_gamma() -> None:
 def test_epsilon() -> None:
     expected: int = 9
     assert epsilon(load_input()) == expected
+
+
+def test_by_bit() -> None:
+    expected: bool = True
+    assert by_bit(load_input()[0], 0, "0") == expected
 
 
 def test_o2() -> None:

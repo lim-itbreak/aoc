@@ -6,14 +6,15 @@ def load_input(filename: str = "example") -> Input:
         numbers: list[int] = [int(n) for n in fp.readline().split(",")]
         boards: list[list[int]] = []
         board: list[int] = []
-        fp.readline()  # skip the blank line
         for line in fp:
             if not line.strip():
-                boards.append(board)
-                board: list[int] = []
+                if board:
+                    boards.append(board)
+                    board: list[int] = []
             else:
                 board.extend([int(n) for n in line.split()])
-        boards.append(board)
+        if board:
+            boards.append(board)
         return numbers, boards
 
 
@@ -33,7 +34,7 @@ def score(board: list[int]) -> int:
     return sum(filter(lambda n: n != -1, board))
 
 
-def play(inputs: Input) -> int:
+def play(inputs: Input) -> list[int]:
     numbers: list[int] = inputs[0]
     boards: list[list[int]] = inputs[1]
     won: list[int] = []

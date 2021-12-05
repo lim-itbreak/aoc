@@ -119,6 +119,25 @@ def test_load_input() -> None:
     assert load_input() == expected
 
 
+def test_check() -> None:
+    board: list[int] = load_input()[1][0]
+
+    expected: bool = False
+    board[0:4] = 4 * [-1]
+    assert check(board) == expected
+
+    expected: bool = True
+    board[4] = -1
+    assert check(board) == expected
+
+
+def test_score() -> None:
+    expected: int = 278
+    board: list[int] = load_input()[1][0]
+    board[0] = -1
+    assert score(board) == expected
+
+
 def test_part1() -> None:
     expected: int = 4512
     assert part1(load_input()) == expected
