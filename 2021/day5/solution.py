@@ -1,9 +1,11 @@
 from collections import Counter
+from typing import TextIO
 
 Input = list[list[list[int]]]
 
 
 def load_input(filename: str = "example") -> Input:
+    fp: TextIO
     with open(filename) as fp:
         return [
             [[int(c) for c in p.split(",")] for p in line.split("->")] for line in fp
@@ -17,14 +19,16 @@ def danger_will_robinson(inputs: Input, diagonals: bool = False) -> int:
     for p1, p2 in inputs:
         x1: int
         y1: int
+        x1, y1 = p1
         x2: int
         y2: int
-        x1, y1 = p1
         x2, y2 = p2
         x3: int = -1 if x2 - x1 < 1 else 1
         y3: int = -1 if y2 - y1 < 1 else 1
         if x1 == x2 or y1 == y2:
+            x: int
             for x in range(x1, max(0, x2 + x3), x3):
+                y: int
                 for y in range(y1, max(0, y2 + y3), y3):
                     vents.append((x, y))
         elif diagonals:

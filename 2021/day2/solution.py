@@ -1,7 +1,10 @@
+from typing import TextIO
+
 Input = list[tuple[str, int]]
 
 
 def load_input(filename: str = "example") -> Input:
+    fp: TextIO
     with open(filename) as fp:
         return [
             (direction, int(value))
@@ -12,6 +15,8 @@ def load_input(filename: str = "example") -> Input:
 def part1(inputs: Input) -> int:
     horizontal: int = 0
     vertical: int = 0
+    direction: str
+    value: int
     for direction, value in inputs:
         match direction:
             case "forward":
@@ -27,6 +32,8 @@ def part2(inputs: Input) -> int:
     horizontal: int = 0
     vertical: int = 0
     aim: int = 0
+    direction: str
+    value: int
     for direction, value in inputs:
         match direction:
             case "forward":

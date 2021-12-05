@@ -1,31 +1,32 @@
+from typing import TextIO
+
 Input = list[int]
 
 
 def load_input(filename: str = "example") -> Input:
+    fp: TextIO
     with open(filename) as fp:
         return [int(line) for line in fp]
 
 
-def part1(inputs: Input) -> int:
-    count: int = 0
-    previous: int = inputs[0]
-    for i in range(1, len(inputs)):
-        if inputs[i] > previous:
-            count += 1
-        previous: int = inputs[i]
-    return count
-
-
-def part2(inputs: Input) -> int:
-    size: int = 3
+def increases(inputs: Input, size: int = 1) -> int:
     count: int = 0
     previous: int = sum(inputs[:size])
+    i: int
     for i in range(1, len(inputs) - (size - 1)):
         window: int = sum(inputs[i : i + size])
         if window > previous:
             count += 1
         previous: int = window
     return count
+
+
+def part1(inputs: Input) -> int:
+    return increases(inputs)
+
+
+def part2(inputs: Input) -> int:
+    return increases(inputs, size=3)
 
 
 if __name__ == "__main__":
