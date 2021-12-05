@@ -16,14 +16,14 @@ def part1(inputs: Input) -> int:
     return count
 
 
-def part2(inputs: Input):
+def part2(inputs: Input) -> int:
     size: int = 3
     count: int = 0
-    for i in range(len(inputs) - (size - 1)):
+    previous: int = sum(inputs[:size])
+    for i in range(1, len(inputs) - (size - 1)):
         window: int = sum(inputs[i : i + size])
-        if i != 0:
-            if window > previous:
-                count += 1
+        if window > previous:
+            count += 1
         previous: int = window
     return count
 
