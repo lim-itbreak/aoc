@@ -13,7 +13,7 @@ def load_input(filename: str = "example") -> Input:
 
 
 def danger_will_robinson(inputs: Input, diagonals: bool = False) -> int:
-    vents: List[Tuple[int]] = []
+    vents: List[Tuple[int, int]] = []
     p1: List[int]
     p2: List[int]
     for p1, p2 in inputs:
@@ -35,7 +35,7 @@ def danger_will_robinson(inputs: Input, diagonals: bool = False) -> int:
             vents.extend(
                 zip(range(x1, max(0, x2 + x3), x3), range(y1, max(0, y2 + y3), y3))
             )
-    vent_count: Counter = Counter(vents)
+    vent_count: Counter[Tuple[int, int]] = Counter(vents)
     return len([p for p in vent_count if vent_count[p] > 1])
 
 

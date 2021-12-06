@@ -11,17 +11,17 @@ def load_input(filename: str = "example") -> Input:
 
 
 def lantern_fish(inputs: Input, days: int) -> int:
-    day_in: Counter = Counter(inputs)
+    day_in: Counter[int] = Counter(inputs)
     _: int
     for _ in range(days):
-        day_out: Counter = Counter()
+        day_out: Counter[int] = Counter()
         timer: int
         for timer in day_in:
             day_out[timer - 1] = day_in[timer]
         new: int = day_out.pop(-1, 0)
         day_out[6] += new
         day_out[8] = new
-        day_in: Counter = day_out
+        day_in: Counter[int] = day_out
     return sum(day_in[timer] for timer in day_in)
 
 
