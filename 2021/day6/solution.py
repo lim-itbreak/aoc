@@ -26,6 +26,6 @@ def lantern_fish(inputs: Input, days: int) -> int:
 
 
 if __name__ == "__main__":
-    inputs: Input = load_input(filename="input")
+    inputs: Input = load_input(filename="puzzle")
     print(f"Part 1 Answer: {lantern_fish(inputs, days=80)}")
     print(f"Part 2 Answer: {lantern_fish(inputs, days=256)}")
