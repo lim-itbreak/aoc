@@ -1,9 +1,9 @@
 from collections import Counter
 from functools import partial
-from typing import TextIO
+from typing import List, TextIO, Tuple
 
-Input = list[str]
-Common = list[tuple[str, int]]
+Input = List[str]
+Common = List[Tuple[str, int]]
 
 
 def load_input(filename: str = "example") -> Input:
@@ -39,10 +39,10 @@ def by_bit(bin: str, pos: int, bit: str) -> bool:
 
 
 def o2(inputs: Input) -> int:
-    filtered: list = inputs
+    filtered: Input = inputs
     pos: int
     for pos in range(len(inputs[0])):
-        filtered: list[str] = list(
+        filtered: Input = list(
             filter(
                 partial(by_bit, pos=pos, bit=most_common_bit(filtered, pos)), filtered
             )
@@ -51,10 +51,10 @@ def o2(inputs: Input) -> int:
 
 
 def co2(inputs: Input) -> int:
-    filtered: list = inputs
+    filtered: Input = inputs
     pos: int
     for pos in range(len(inputs[0])):
-        filtered: list = list(
+        filtered: Input = list(
             filter(
                 partial(by_bit, pos=pos, bit=least_common_bit(filtered, pos)), filtered
             )

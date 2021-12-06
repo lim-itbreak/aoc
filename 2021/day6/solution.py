@@ -1,7 +1,7 @@
 from collections import Counter
-from typing import TextIO
+from typing import List, TextIO
 
-Input = list[int]
+Input = List[int]
 
 
 def load_input(filename: str = "example") -> Input:
@@ -15,6 +15,7 @@ def lantern_fish(inputs: Input, days: int) -> int:
     _: int
     for _ in range(days):
         day_out: Counter = Counter()
+        timer: int
         for timer in day_in:
             day_out[timer - 1] = day_in[timer]
         new: int = day_out.pop(-1, 0)

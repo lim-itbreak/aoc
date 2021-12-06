@@ -1,20 +1,20 @@
-from typing import TextIO
+from typing import List, TextIO, Tuple
 
-Input = tuple[list[int], list[list[int]]]
+Input = Tuple[List[int], List[List[int]]]
 
 
 def load_input(filename: str = "example") -> Input:
     fp: TextIO
     with open(filename) as fp:
-        numbers: list[int] = [int(n) for n in fp.readline().split(",")]
-        boards: list[list[int]] = []
-        board: list[int] = []
+        numbers: List[int] = [int(n) for n in fp.readline().split(",")]
+        boards: List[List[int]] = []
+        board: List[int] = []
         line: str
         for line in fp:
             if not line.strip():
                 if board:
                     boards.append(board)
-                    board: list[int] = []
+                    board: List[int] = []
             else:
                 board.extend([int(n) for n in line.split()])
         if board:
@@ -22,9 +22,9 @@ def load_input(filename: str = "example") -> Input:
         return numbers, boards
 
 
-def check(board: list[int]) -> bool:
+def check(board: List[int]) -> bool:
     size: int = 5
-    win: list[int] = size * [-1]
+    win: List[int] = size * [-1]
     if board.count(-1) >= size:
         i: int
         for i in range(size):
@@ -35,22 +35,22 @@ def check(board: list[int]) -> bool:
     return False
 
 
-def score(board: list[int]) -> int:
+def score(board: List[int]) -> int:
     return sum(filter(lambda n: n != -1, board))
 
 
-def play(inputs: Input) -> list[int]:
-    numbers: list[int]
-    boards: list[list[int]]
+def play(inputs: Input) -> List[int]:
+    numbers: List[int]
+    boards: List[List[int]]
     numbers, boards = inputs
-    won: list[int] = []
-    scores: list[int] = []
+    won: List[int] = []
+    scores: List[int] = []
     number: int
     for number in numbers:
         i: int
         for i in range(len(boards)):
             if i not in won:
-                board: list[int] = boards[i]
+                board: List[int] = boards[i]
                 if number in board:
                     board[board.index(number)] = -1
                     if check(board):

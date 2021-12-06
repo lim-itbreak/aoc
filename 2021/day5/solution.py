@@ -1,7 +1,7 @@
 from collections import Counter
-from typing import TextIO
+from typing import List, TextIO, Tuple
 
-Input = list[list[list[int]]]
+Input = List[List[List[int]]]
 
 
 def load_input(filename: str = "example") -> Input:
@@ -13,9 +13,9 @@ def load_input(filename: str = "example") -> Input:
 
 
 def danger_will_robinson(inputs: Input, diagonals: bool = False) -> int:
-    vents: list[tuple[int]] = []
-    p1: list[int]
-    p2: list[int]
+    vents: List[Tuple[int]] = []
+    p1: List[int]
+    p2: List[int]
     for p1, p2 in inputs:
         x1: int
         y1: int

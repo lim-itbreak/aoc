@@ -1,6 +1,6 @@
-from typing import TextIO
+from typing import List, TextIO, Tuple
 
-Input = list[tuple[str, int]]
+Input = List[Tuple[str, int]]
 
 
 def load_input(filename: str = "example") -> Input:
