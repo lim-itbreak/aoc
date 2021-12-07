@@ -1,4 +1,4 @@
-# aoc
+# AoC
 
 My inelegant but simplistic solutions for [Advent of Code](https://adventofcode.com).
 
