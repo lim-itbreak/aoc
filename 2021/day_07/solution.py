@@ -1,4 +1,5 @@
 from collections import Counter
+from functools import cache
 from typing import List, TextIO
 
 Input = List[int]
@@ -10,6 +11,11 @@ def load_input(filename: str = "example") -> Input:
         return [int(i) for i in fp.read().split(",")]
 
 
+@cache
+def sum_range(dist: int) -> int:
+    return sum(range(dist + 1))
+
+
 def minimize_fuel(inputs: Input, constant_burn: bool = True):
     crabs: Counter[int] = Counter(inputs)
     fuel: List[int] = []
@@ -18,8 +24,9 @@ def minimize_fuel(inputs: Input, constant_burn: bool = True):
         used: List(int) = []
         pos: int
         for pos in crabs:
-            dist = abs(align - pos)
-            used.append((dist if constant_burn else sum(range(dist + 1))) * crabs[pos])
+            if align != pos:
+                dist = abs(align - pos)
+                used.append((dist if constant_burn else sum_range(dist)) * crabs[pos])
         fuel.append(sum(used))
     return min(fuel)
 
