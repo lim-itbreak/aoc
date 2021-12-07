@@ -16,27 +16,29 @@ def sum_range(dist: int) -> int:
     return sum(range(dist + 1))
 
 
-def minimize_fuel(inputs: Input, constant_burn: bool = True):
+def consumption(inputs: Input, constant_burn: bool = True) -> List[int]:
     crabs: Counter[int] = Counter(inputs)
-    fuel: List[int] = []
+    all_pos: List[int] = []
     align: int
     for align in range(max(crabs)):
-        used: List(int) = []
+        consumed: List(int) = []
         pos: int
         for pos in crabs:
             if align != pos:
                 dist = abs(align - pos)
-                used.append((dist if constant_burn else sum_range(dist)) * crabs[pos])
-        fuel.append(sum(used))
-    return min(fuel)
+                consumed.append(
+                    (dist if constant_burn else sum_range(dist)) * crabs[pos]
+                )
+        all_pos.append(sum(consumed))
+    return all_pos
 
 
 def part1(inputs: Input) -> int:
-    return minimize_fuel(inputs)
+    return min(consumption(inputs))
 
 
 def part2(inputs: Input) -> int:
-    return minimize_fuel(inputs, constant_burn=False)
+    return min(consumption(inputs, constant_burn=False))
 
 
 if __name__ == "__main__":
