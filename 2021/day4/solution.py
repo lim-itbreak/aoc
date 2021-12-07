@@ -23,7 +23,7 @@ def load_input(filename: str = "example") -> Input:
 
 
 def check(board: List[int]) -> bool:
-    size: int = 5
+    size: int = int(len(board) ** 0.5)
     win: List[int] = size * [-1]
     if board.count(-1) >= size:
         i: int

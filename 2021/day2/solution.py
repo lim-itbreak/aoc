@@ -12,38 +12,39 @@ def load_input(filename: str = "example") -> Input:
         ]
 
 
-def part1(inputs: Input) -> int:
-    horizontal: int = 0
-    vertical: int = 0
-    direction: str
-    value: int
-    for direction, value in inputs:
-        match direction:
-            case "forward":
-                horizontal += value
-            case "down":
-                vertical += value
-            case "up":
-                vertical -= value
-    return horizontal * vertical
-
-
-def part2(inputs: Input) -> int:
+def position(inputs: Input, aiming: bool = False):
     horizontal: int = 0
     vertical: int = 0
     aim: int = 0
+
     direction: str
     value: int
     for direction, value in inputs:
         match direction:
             case "forward":
                 horizontal += value
-                vertical += aim * value
+                if aiming:
+                    vertical += aim * value
             case "down":
-                aim += value
+                if aiming:
+                    aim += value
+                else:
+                    vertical += value
             case "up":
-                aim -= value
+                if aiming:
+                    aim -= value
+                else:
+                    vertical -= value
+
     return horizontal * vertical
+
+
+def part1(inputs: Input) -> int:
+    return position(inputs)
+
+
+def part2(inputs: Input) -> int:
+    return position(inputs, aiming=True)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ def load_input(filename: str = "example") -> Input:
         return [int(line) for line in fp]
 
 
-def increases(inputs: Input, size: int = 1) -> int:
+def deeper(inputs: Input, size: int = 1) -> int:
     count: int = 0
     previous: int = sum(inputs[:size])
     i: int
@@ -22,11 +22,11 @@ def increases(inputs: Input, size: int = 1) -> int:
 
 
 def part1(inputs: Input) -> int:
-    return increases(inputs)
+    return deeper(inputs)
 
 
 def part2(inputs: Input) -> int:
-    return increases(inputs, size=3)
+    return deeper(inputs, size=3)
 
 
 if __name__ == "__main__":

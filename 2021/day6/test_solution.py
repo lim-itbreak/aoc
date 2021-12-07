@@ -6,12 +6,16 @@ def test_load_input() -> None:
     assert load_input() == expected
 
 
-def test_lantern_fish() -> None:
+def test_18_days() -> None:
     expected: int = 26
     assert lantern_fish(load_input(), days=18) == expected
 
+
+def test_80_days() -> None:
     expected: int = 5934
     assert lantern_fish(load_input(), days=80) == expected
 
+
+def test_256_days() -> None:
     expected: int = 26984457539
     assert lantern_fish(load_input(), days=256) == expected

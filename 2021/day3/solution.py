@@ -12,18 +12,22 @@ def load_input(filename: str = "example") -> Input:
         return [line.strip() for line in fp]
 
 
-def bit_counter(inputs: Input, pos: int) -> Common:
-    return Counter((bin[pos] for bin in inputs)).most_common()
-
-
 def most_common_bit(inputs: Input, pos: int) -> str:
-    counts: Common = bit_counter(inputs, pos)
-    return "1" if len(counts) == 2 and counts[0][1] == counts[1][1] else counts[0][0]
+    bit_counts: Common = Counter((bin[pos] for bin in inputs)).most_common()
+    return (
+        "1"
+        if len(bit_counts) == 2 and bit_counts[0][1] == bit_counts[1][1]
+        else bit_counts[0][0]
+    )
 
 
 def least_common_bit(inputs: Input, pos: int) -> str:
-    counts: Common = bit_counter(inputs, pos)
-    return "0" if len(counts) == 2 and counts[0][1] == counts[1][1] else counts[-1][0]
+    bit_counts: Common = Counter((bin[pos] for bin in inputs)).most_common()
+    return (
+        "0"
+        if len(bit_counts) == 2 and bit_counts[0][1] == bit_counts[1][1]
+        else bit_counts[-1][0]
+    )
 
 
 def gamma(inputs: Input) -> int:

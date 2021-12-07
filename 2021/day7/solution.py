@@ -10,22 +10,22 @@ def load_input(filename: str = "example") -> Input:
         return [int(i) for i in fp.read().split(",")]
 
 
-def minimize_fuel(inputs: Input, constant_burn: bool):
+def minimize_fuel(inputs: Input, constant_burn: bool = True):
     crabs: Counter[int] = Counter(inputs)
     fuel: List[int] = []
     align: int
     for align in range(max(crabs)):
-        used: int = 0
+        used: List(int) = []
         pos: int
         for pos in crabs:
             dist = abs(align - pos)
-            used += (dist if constant_burn else sum(range(dist + 1))) * crabs[pos]
-        fuel.append(used)
+            used.append((dist if constant_burn else sum(range(dist + 1))) * crabs[pos])
+        fuel.append(sum(used))
     return min(fuel)
 
 
 def part1(inputs: Input) -> int:
-    return minimize_fuel(inputs, constant_burn=True)
+    return minimize_fuel(inputs)
 
 
 def part2(inputs: Input) -> int:

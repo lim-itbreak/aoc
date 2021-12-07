@@ -19,11 +19,6 @@ def test_load_input() -> None:
     assert load_input() == expected
 
 
-def test_bit_counter() -> None:
-    expected: Common = [("1", 7), ("0", 5)]
-    assert bit_counter(load_input(), 0) == expected
-
-
 def test_most_common_bit() -> None:
     expected: str = "1"
     assert most_common_bit(load_input(), 0) == expected
