@@ -1,25 +1,56 @@
-from typing import Dict, FrozenSet, List, TextIO, Tuple
+from typing import Dict, FrozenSet, Iterable, List, TextIO
 
-Input = List[Tuple[List[FrozenSet[str]], List[FrozenSet[str]]]]
+Input = List[List[List[FrozenSet[str]]]]
+
+
+def convert(line: str) -> List[FrozenSet[str]]:
+    return [frozenset(token) for token in line.split()]
 
 
 def load_input(filename: str = "example") -> Input:
-    notes: Input = []
     fp: TextIO
     with open(filename) as fp:
-        line: str
-        for line in fp:
-            signals: str
-            digits: str
-            signals, digits = line.split("|")
-            signals: List[FrozenSet[str]] = [
-                frozenset(signal) for signal in signals.split()
-            ]
-            digits: List[FrozenSet[str]] = [
-                frozenset(digit) for digit in digits.split()
-            ]
-            notes.append((signals, digits))
-    return notes
+        return [[convert(string) for string in line.split("|")] for line in fp]
+
+
+def decode(signals: Iterable[FrozenSet[str]]) -> Dict[FrozenSet[str], str]:
+    mapping: Dict[FrozenSet[str], str] = {}
+
+    signal: FrozenSet[str]
+    for signal in signals:
+        match len(signal):
+            case 2:
+                mapping[signal] = "1"
+                one: FrozenSet[str] = signal
+            case 4:
+                mapping[signal] = "4"
+                four: FrozenSet[str] = signal
+            case 3:
+                mapping[signal] = "7"
+            case 7:
+                mapping[signal] = "8"
+    for signal in signals:
+        match len(signal):
+            case 5:
+                if len(signal.intersection(four)) == 2:
+                    mapping[signal] = "2"
+                elif signal.issuperset(one):
+                    mapping[signal] = "3"
+                else:
+                    mapping[signal] = "5"
+            case 6:
+                if signal.issuperset(four):
+                    mapping[signal] = "9"
+                elif signal.issuperset(one):
+                    mapping[signal] = "0"
+                else:
+                    mapping[signal] = "6"
+
+    return mapping
+
+
+def read(digits: List[FrozenSet[str]], mapping: Dict[FrozenSet[str], str]) -> int:
+    return int("".join(mapping[signal] for signal in digits))
 
 
 def part1(inputs: Input) -> int:
@@ -30,45 +61,7 @@ def part1(inputs: Input) -> int:
 
 
 def part2(inputs: Input) -> int:
-    decoded: List[int] = []
-
-    signals: List[FrozenSet[str]]
-    digits: List[FrozenSet[str]]
-    for signals, digits in inputs:
-        mapping: Dict[FrozenSet[str], str] = {}
-
-        signal: FrozenSet[str]
-        for signal in signals:
-            match len(signal):
-                case 2:
-                    mapping[signal] = "1"
-                    one: FrozenSet[str] = signal
-                case 4:
-                    mapping[signal] = "4"
-                    four: FrozenSet[str] = signal
-                case 3:
-                    mapping[signal] = "7"
-                case 7:
-                    mapping[signal] = "8"
-        for signal in signals:
-            match len(signal):
-                case 5:
-                    if len(signal.intersection(four)) == 2:
-                        mapping[signal] = "2"
-                    elif signal.issuperset(one):
-                        mapping[signal] = "3"
-                    else:
-                        mapping[signal] = "5"
-                case 6:
-                    if signal.issuperset(four):
-                        mapping[signal] = "9"
-                    elif signal.issuperset(one):
-                        mapping[signal] = "0"
-                    else:
-                        mapping[signal] = "6"
-
-        decoded.append(int("".join(mapping[signal] for signal in digits)))
-    return sum(decoded)
+    return sum(read(digits, decode(signals)) for signals, digits in inputs)
 
 
 if __name__ == "__main__":
