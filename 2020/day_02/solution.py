@@ -1,10 +1,10 @@
 from typing import List, TextIO, Tuple
 
-Input = List[int]
+Input = List[Tuple[List[int], str, str]]
 
 
 def load_input(filename: str = "example") -> Input:
-    output: List[Tuple[str, List[int], str]] = []
+    output: Input = []
     fp: TextIO
     with open(filename) as fp:
         line: str
@@ -14,8 +14,8 @@ def load_input(filename: str = "example") -> Input:
             rule, password = line.strip().split(": ")
             letter: str
             rule, letter = rule.split()
-            rule: List[int] = [int(i) for i in rule.split("-")]
-            output.append((rule, letter, password))
+            numbers: List[int] = [int(i) for i in rule.split("-")]
+            output.append((numbers, letter, password))
     return output
 
 

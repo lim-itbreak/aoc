@@ -46,7 +46,7 @@ def o2(inputs: Input) -> int:
     filtered: Input = inputs
     pos: int
     for pos in range(len(inputs[0])):
-        filtered: Input = list(
+        filtered = list(
             filter(
                 partial(by_bit, pos=pos, bit=most_common_bit(filtered, pos)), filtered
             )
@@ -58,7 +58,7 @@ def co2(inputs: Input) -> int:
     filtered: Input = inputs
     pos: int
     for pos in range(len(inputs[0])):
-        filtered: Input = list(
+        filtered = list(
             filter(
                 partial(by_bit, pos=pos, bit=least_common_bit(filtered, pos)), filtered
             )

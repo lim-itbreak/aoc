@@ -21,7 +21,7 @@ def consumption(inputs: Input, constant_burn: bool = True) -> List[int]:
     all_pos: List[int] = []
     align: int
     for align in range(max(crabs)):
-        consumed: List(int) = []
+        consumed: List[int] = []
         pos: int
         for pos in crabs:
             if align != pos:

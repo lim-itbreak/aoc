@@ -6,4 +6,4 @@ No external dependencies, but does require Python 3.10 - I really wanted to try 
 
 Scripts/tests can be run after changing the working directory to the containing `day_##` folder.
 
-Code is `isort`ed, `black`end, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.
+Code is `isort`ed, `black`end, `mypy`ed, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.

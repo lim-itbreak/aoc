@@ -17,7 +17,7 @@ def deeper(inputs: Input, size: int = 1) -> int:
         window: int = sum(inputs[i : i + size])
         if window > previous:
             count += 1
-        previous: int = window
+        previous = window
     return count
 
 

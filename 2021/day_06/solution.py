@@ -21,7 +21,7 @@ def lantern_fish(inputs: Input, days: int) -> int:
         new: int = day_out.pop(-1, 0)
         day_out[6] += new
         day_out[8] = new
-        day_in: Counter[int] = day_out
+        day_in = day_out
     return sum(day_in[timer] for timer in day_in)
 
 

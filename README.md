@@ -11,4 +11,4 @@ Scripts/tests can be run after changing the working directory to the containing 
 * `python tests.py` to run `pytest` in all `day_##` folders (for all years)
 * `python tests.py YYYY YYYY YYYY` to run `pytest` in all `day_##` folders for each `YYYY`
 
-Code is `isort`ed, `black`end, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.
+Code is `isort`ed, `black`end, `mypy`ed, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.

@@ -16,6 +16,7 @@ def part1(inputs: Input) -> int:
         for j in range(i + 1, len(inputs)):
             if inputs[i] + inputs[j] == 2020:
                 return inputs[i] * inputs[j]
+    return 0
 
 
 def part2(inputs: Input) -> int:
@@ -28,6 +29,7 @@ def part2(inputs: Input) -> int:
                 for k in range(j + 1, len(inputs)):
                     if inputs[i] + inputs[j] + inputs[k] == 2020:
                         return inputs[i] * inputs[j] * inputs[k]
+    return 0
 
 
 if __name__ == "__main__":

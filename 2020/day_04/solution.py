@@ -3,8 +3,8 @@ from typing import Dict, List, TextIO
 Input = List[Dict[str, str]]
 
 
-def fields(passport: str):
-    return dict(token.split(":") for token in passport.split())
+def fields(passport: str) -> Dict[str, str]:
+    return dict(tuple(token.split(":")) for token in passport.split())  # type: ignore
 
 
 def load_input(filename: str = "example") -> Input:
