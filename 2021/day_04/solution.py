@@ -1,25 +1,15 @@
-from typing import List, TextIO, Tuple
+from typing import List, TextIO
 
-Input = Tuple[List[int], List[List[int]]]
+Input = List[List[int]]
 
 
 def load_input(filename: str = "example") -> Input:
     fp: TextIO
     with open(filename) as fp:
-        numbers: List[int] = [int(n) for n in fp.readline().split(",")]
-        boards: List[List[int]] = []
-        board: List[int] = []
-        line: str
-        for line in fp:
-            if not line.strip():
-                if board:
-                    boards.append(board)
-                    board: List[int] = []
-            else:
-                board.extend([int(n) for n in line.split()])
-        if board:
-            boards.append(board)
-        return numbers, boards
+        return [
+            [int(n) for n in section.replace(",", " ").split()]
+            for section in fp.read().split("\n\n")
+        ]
 
 
 def check(board: List[int]) -> bool:
@@ -40,17 +30,14 @@ def score(board: List[int]) -> int:
 
 
 def play(inputs: Input) -> List[int]:
-    numbers: List[int]
-    boards: List[List[int]]
-    numbers, boards = inputs
-    won: List[int] = []
     scores: List[int] = []
+    won: List[int] = []
     number: int
-    for number in numbers:
+    for number in inputs[0]:
         i: int
-        for i in range(len(boards)):
+        for i in range(1, len(inputs)):
             if i not in won:
-                board: List[int] = boards[i]
+                board: List[int] = inputs[i]
                 if number in board:
                     board[board.index(number)] = -1
                     if check(board):
