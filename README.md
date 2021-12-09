@@ -6,7 +6,9 @@ No external dependencies, but does require Python 3.10 - I really wanted to try 
 
 Scripts/tests can be run after changing the working directory to the containing `day_##` folder.  You can also run:
 
-* `python YYYY/solutions.py` to run all `day_##/solution.py` scripts for year `YYYY`
-* `python YYYY/tests.py` to run `pytest` in each `day_##` folder for year `YYYY`
+* `python solutions.py` to run all `day_##/solution.py` (for all years)
+* `python solutions.py YYYY YYYY YYYY` to run all `day_##/solution.py` for each `YYYY`
+* `python tests.py` to run `pytest` in all `day_##` folders (for all years)
+* `python tests.py YYYY YYYY YYYY` to run `pytest` in all `day_##` folders for each `YYYY`
 
 Code is `isort`ed, `black`end, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.
