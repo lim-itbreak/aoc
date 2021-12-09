@@ -8,7 +8,7 @@ Scripts/tests can be run after changing the working directory to the containing 
 
 * `python solutions.py` to run all `day_##/solution.py` (for all years)
 * `python solutions.py YYYY YYYY YYYY` to run all `day_##/solution.py` for each `YYYY`
-* `python tests.py` to run `pytest` in all `day_##` folders (for all years)
-* `python tests.py YYYY YYYY YYYY` to run `pytest` in all `day_##` folders for each `YYYY`
+* `python tests.py` to run `pytest` and `mypy solution.py` in all `day_##` folders (for all years)
+* `python tests.py YYYY YYYY YYYY` to run `pytest` and `mypy solution.py` in all `day_##` folders for each `YYYY`
 
 Code is `isort`ed, `black`end, `mypy`ed, and `pytest`ed.  I may be over-type-hinting, but it's mostly for practice/experimentation.
