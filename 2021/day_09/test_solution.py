@@ -20,5 +20,5 @@ def test_part1() -> None:
 
 
 def test_part2() -> None:
-    expected: int = 0
+    expected: int = 1134
     assert part2(example) == expected
