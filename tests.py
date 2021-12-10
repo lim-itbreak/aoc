@@ -12,5 +12,5 @@ for year in sorted(os.listdir(aoc)):
                 if day.startswith("day"):
                     print(f"=== {year} Day {int(day.split('_')[1])} ===")
                     os.chdir(os.path.join(aoc, year, day))
-                    os.system("mypy solution.py")
+                    os.system("mypy *.py")
                     os.system("pytest")

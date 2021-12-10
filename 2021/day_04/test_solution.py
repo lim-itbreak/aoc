@@ -123,20 +123,21 @@ def test_load_input() -> None:
 
 def test_check() -> None:
     board: List[int] = deepcopy(example[1])
+    expected: bool
 
-    expected: bool = False
     board[0:4] = 4 * [-1]
+    expected = False
     assert check(board) == expected
 
-    expected: bool = True
     board[4] = -1
+    expected = True
     assert check(board) == expected
 
 
 def test_score() -> None:
-    expected: int = 278
     board: List[int] = deepcopy(example[1])
     board[0] = -1
+    expected: int = 278
     assert score(board) == expected
 
 
