@@ -29,15 +29,15 @@ def score(board: List[int]) -> int:
     return sum(filter(lambda n: n != -1, board))
 
 
-def play(inputs: Input) -> List[int]:
+def play(bingo: Input) -> List[int]:
     scores: List[int] = []
     won: List[int] = []
     number: int
-    for number in inputs[0]:
+    for number in bingo[0]:
         i: int
-        for i in range(1, len(inputs)):
+        for i in range(1, len(bingo)):
             if i not in won:
-                board: List[int] = inputs[i]
+                board: List[int] = bingo[i]
                 if number in board:
                     board[board.index(number)] = -1
                     if check(board):

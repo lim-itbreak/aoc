@@ -12,14 +12,14 @@ def load_input(filename: str = "example") -> Input:
         ]
 
 
-def position(inputs: Input, aiming: bool = False):
+def position(path: Input, aiming: bool = False):
     horizontal: int = 0
     vertical: int = 0
     aim: int = 0
 
     direction: str
     value: int
-    for direction, value in inputs:
+    for direction, value in path:
         match direction:
             case "forward":
                 horizontal += value

@@ -10,8 +10,8 @@ def load_input(filename: str = "example") -> Input:
         return [int(i) for i in fp.read().split(",")]
 
 
-def lantern_fish(inputs: Input, days: int) -> int:
-    day_in: Counter[int] = Counter(inputs)
+def lantern_fish(timers: Input, days: int) -> int:
+    day_in: Counter[int] = Counter(timers)
     _: int
     for _ in range(days):
         day_out: Counter[int] = Counter()

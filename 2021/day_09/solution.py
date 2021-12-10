@@ -1,4 +1,4 @@
-import itertools
+from itertools import chain
 from math import prod
 from typing import List, Set, TextIO, Tuple
 
@@ -34,7 +34,7 @@ def low_point(x: int, y: int, heights: Input) -> bool:
 
 def low_points(heights: Input) -> List[Tuple[int, int]]:
     return list(
-        itertools.chain(
+        chain(
             *(
                 [(x, y) for x in range(len(heights[y])) if low_point(x, y, heights)]
                 for y in range(len(heights))

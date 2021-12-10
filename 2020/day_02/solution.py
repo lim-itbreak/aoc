@@ -14,8 +14,7 @@ def load_input(filename: str = "example") -> Input:
             rule, password = line.strip().split(": ")
             letter: str
             rule, letter = rule.split()
-            numbers: List[int] = [int(i) for i in rule.split("-")]
-            output.append((numbers, letter, password))
+            output.append(([int(i) for i in rule.split("-")], letter, password))
     return output
 
 

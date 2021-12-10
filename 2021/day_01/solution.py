@@ -9,12 +9,12 @@ def load_input(filename: str = "example") -> Input:
         return [int(line) for line in fp]
 
 
-def deeper(inputs: Input, size: int = 1) -> int:
+def deeper(report: Input, size: int = 1) -> int:
     count: int = 0
-    previous: int = sum(inputs[:size])
+    previous: int = sum(report[:size])
     i: int
-    for i in range(1, len(inputs) - (size - 1)):
-        window: int = sum(inputs[i : i + size])
+    for i in range(1, len(report) - (size - 1)):
+        window: int = sum(report[i : i + size])
         if window > previous:
             count += 1
         previous = window

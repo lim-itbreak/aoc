@@ -12,11 +12,11 @@ def load_input(filename: str = "example") -> Input:
         ]
 
 
-def danger_will_robinson(inputs: Input, diagonals: bool = False) -> int:
+def danger_will_robinson(vent_ends: Input, diagonals: bool = False) -> int:
     vents: List[Tuple[int, int]] = []
     p1: List[int]
     p2: List[int]
-    for p1, p2 in inputs:
+    for p1, p2 in vent_ends:
         x1: int
         y1: int
         x1, y1 = p1

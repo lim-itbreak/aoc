@@ -12,8 +12,8 @@ def load_input(filename: str = "example") -> Input:
         return [line.strip() for line in fp]
 
 
-def most_common_bit(inputs: Input, pos: int) -> str:
-    bit_counts: Common = Counter((bin[pos] for bin in inputs)).most_common()
+def most_common_bit(report: Input, pos: int) -> str:
+    bit_counts: Common = Counter((bin[pos] for bin in report)).most_common()
     return (
         "1"
         if len(bit_counts) == 2 and bit_counts[0][1] == bit_counts[1][1]
@@ -21,8 +21,8 @@ def most_common_bit(inputs: Input, pos: int) -> str:
     )
 
 
-def least_common_bit(inputs: Input, pos: int) -> str:
-    bit_counts: Common = Counter((bin[pos] for bin in inputs)).most_common()
+def least_common_bit(report: Input, pos: int) -> str:
+    bit_counts: Common = Counter((bin[pos] for bin in report)).most_common()
     return (
         "0"
         if len(bit_counts) == 2 and bit_counts[0][1] == bit_counts[1][1]
@@ -30,22 +30,22 @@ def least_common_bit(inputs: Input, pos: int) -> str:
     )
 
 
-def gamma(inputs: Input) -> int:
-    return int("".join(most_common_bit(inputs, i) for i in range(len(inputs[0]))), 2)
+def gamma(report: Input) -> int:
+    return int("".join(most_common_bit(report, i) for i in range(len(report[0]))), 2)
 
 
-def epsilon(inputs: Input) -> int:
-    return int("".join(least_common_bit(inputs, i) for i in range(len(inputs[0]))), 2)
+def epsilon(report: Input) -> int:
+    return int("".join(least_common_bit(report, i) for i in range(len(report[0]))), 2)
 
 
 def by_bit(bin: str, pos: int, bit: str) -> bool:
     return bin[pos] == bit
 
 
-def o2(inputs: Input) -> int:
-    filtered: Input = inputs
+def o2(report: Input) -> int:
+    filtered: Input = report
     pos: int
-    for pos in range(len(inputs[0])):
+    for pos in range(len(report[0])):
         filtered = list(
             filter(
                 partial(by_bit, pos=pos, bit=most_common_bit(filtered, pos)), filtered
@@ -54,10 +54,10 @@ def o2(inputs: Input) -> int:
     return int(filtered[0], 2)
 
 
-def co2(inputs: Input) -> int:
-    filtered: Input = inputs
+def co2(report: Input) -> int:
+    filtered: Input = report
     pos: int
-    for pos in range(len(inputs[0])):
+    for pos in range(len(report[0])):
         filtered = list(
             filter(
                 partial(by_bit, pos=pos, bit=least_common_bit(filtered, pos)), filtered
