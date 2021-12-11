@@ -26,13 +26,11 @@ def test_check() -> None:
     assert check("[<(<(<(<{}))><([]([]()") == ")"
     assert check("<{([([[(<>()){}]>(<<{{") == ">"
 
-
-def test_complete() -> None:
-    assert complete("[({(<(())[]>[[{[]{<()<>>") == "}}]])})]"
-    assert complete("[(()[<>])]({[<{<<[]>>(") == ")}>]})"
-    assert complete("(((({<>}<{<{<>}{[]{[]{}") == "}}>}>))))"
-    assert complete("{<[[]]>}<{[{[{[]{()[[[]") == "]]}}]}]}>"
-    assert complete("<{([{{}}[<[[[<>{}]]]>[]]") == "])}>"
+    assert check("[({(<(())[]>[[{[]{<()<>>") == "}}]])})]"
+    assert check("[(()[<>])]({[<{<<[]>>(") == ")}>]})"
+    assert check("(((({<>}<{<{<>}{[]{[]{}") == "}}>}>))))"
+    assert check("{<[[]]>}<{[{[{[]{()[[[]") == "]]}}]}]}>"
+    assert check("<{([{{}}[<[[[<>{}]]]>[]]") == "])}>"
 
 
 def test_calculate() -> None:
@@ -43,11 +41,6 @@ def test_calculate() -> None:
     assert score("])}>") == 294
 
 
-def test_part1() -> None:
-    expected: int = 26397
-    assert part1(example) == expected
-
-
-def test_part2() -> None:
-    expected: int = 288957
-    assert part2(example) == expected
+def test_analyze() -> None:
+    expected: Tuple[int, int] = (26397, 288957)
+    assert analyze(example) == expected

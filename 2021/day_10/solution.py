@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import Dict, List, TextIO
+from typing import Dict, List, TextIO, Tuple
 
 Input = List[str]
 openers: Dict[str, str] = {"(": ")", "[": "]", "{": "}", "<": ">"}
@@ -22,14 +22,9 @@ def check(line: str) -> str:
             stack.pop()
         else:
             return code  # line is corrupted - return unexpected closer
-    return "".join(stack)  # line is incomplete - return unclosed openers
-
-
-def complete(line: str) -> str:
-    stack: str = check(line)
-    if len(stack) > 0 and stack[0] in openers:  # line is incomplete
+    if stack:  # line is incomplete - return closers to complete
         return "".join(openers[code] for code in reversed(stack))
-    return ""  # line was either complete or corrupted
+    return ""  # line is complete
 
 
 def score(completion: str) -> int:
@@ -37,31 +32,26 @@ def score(completion: str) -> int:
     return reduce(lambda total, code: total * 5 + points[code], completion, 0)
 
 
-def part1(inputs: Input) -> int:
+def analyze(inputs: Input) -> Tuple[int, int]:
     points: Dict[str, int] = {")": 3, "]": 57, "}": 1197, ">": 25137}
     errors: List[str] = []
-
-    line: str
-    for line in inputs:
-        stack: str = check(line)
-        if stack in closers:  # line is corrupted
-            errors.append(stack)
-
-    return sum(points[code] for code in errors)
-
-
-def part2(inputs: Input) -> int:
     scores: List[int] = []
+
     line: str
     for line in inputs:
-        stack: str = complete(line)
-        if stack:  # line is incomplete
-            scores.append(score(stack))
+        code: str = check(line)
+        if code in closers:  # line is corrupted
+            errors.append(code)
+        elif code:  # line is incomplete
+            scores.append(score(code))
     scores.sort()
-    return scores[(len(scores) - 1) // 2]
+
+    return sum(points[code] for code in errors), scores[(len(scores) - 1) // 2]
 
 
 if __name__ == "__main__":
-    inputs: Input = load_input(filename="puzzle")
-    print(f"Part 1 Answer: {part1(inputs)}")
-    print(f"Part 2 Answer: {part2(inputs)}")
+    part1: int
+    part2: int
+    part1, part2 = analyze(load_input(filename="puzzle"))
+    print(f"Part 1 Answer: {part1}")
+    print(f"Part 2 Answer: {part2}")

@@ -46,14 +46,7 @@ def play(bingo: Input) -> List[int]:
     return scores
 
 
-def part1(inputs: Input) -> int:
-    return play(inputs)[0]
-
-
-def part2(inputs: Input) -> int:
-    return play(inputs)[-1]
-
-
 if __name__ == "__main__":
-    print(f"Part 1 Answer: {part1(load_input(filename='puzzle'))}")
-    print(f"Part 2 Answer: {part2(load_input(filename='puzzle'))}")
+    scores: List[int] = play(load_input(filename="puzzle"))
+    print(f"Part 1 Answer: {scores[0]}")
+    print(f"Part 2 Answer: {scores[-1]}")

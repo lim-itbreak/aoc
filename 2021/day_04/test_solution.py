@@ -141,11 +141,7 @@ def test_score() -> None:
     assert score(board) == expected
 
 
-def test_part1() -> None:
-    expected: int = 4512
-    assert part1(deepcopy(example)) == expected
-
-
-def test_part2() -> None:
-    expected: int = 1924
-    assert part2(deepcopy(example)) == expected
+def test_play() -> None:
+    scores: List[int] = play(example)
+    assert scores[0] == 4512
+    assert scores[-1] == 1924
