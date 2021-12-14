@@ -20,25 +20,56 @@ def test_load_input() -> None:
 
 
 def test_check() -> None:
-    assert check("{([(<{}[<>[]}>{[]{[(<()>") == "}"
-    assert check("[[<[([]))<([[{}[[()]]]") == ")"
-    assert check("[{[{({}]{}}([{[{{{}}([]") == "]"
-    assert check("[<(<(<(<{}))><([]([]()") == ")"
-    assert check("<{([([[(<>()){}]>(<<{{") == ">"
+    expected: str
 
-    assert check("[({(<(())[]>[[{[]{<()<>>") == "}}]])})]"
-    assert check("[(()[<>])]({[<{<<[]>>(") == ")}>]})"
-    assert check("(((({<>}<{<{<>}{[]{[]{}") == "}}>}>))))"
-    assert check("{<[[]]>}<{[{[{[]{()[[[]") == "]]}}]}]}>"
-    assert check("<{([{{}}[<[[[<>{}]]]>[]]") == "])}>"
+    expected = "}"
+    assert check("{([(<{}[<>[]}>{[]{[(<()>") == expected
+
+    expected = ")"
+    assert check("[[<[([]))<([[{}[[()]]]") == expected
+
+    expected = "]"
+    assert check("[{[{({}]{}}([{[{{{}}([]") == expected
+
+    expected = ")"
+    assert check("[<(<(<(<{}))><([]([]()") == expected
+
+    expected = ">"
+    assert check("<{([([[(<>()){}]>(<<{{") == expected
+
+    expected = "}}]])})]"
+    assert check("[({(<(())[]>[[{[]{<()<>>") == expected
+
+    expected = ")}>]})"
+    assert check("[(()[<>])]({[<{<<[]>>(") == expected
+
+    expected = "}}>}>))))"
+    assert check("(((({<>}<{<{<>}{[]{[]{}") == expected
+
+    expected = "]]}}]}]}>"
+    assert check("{<[[]]>}<{[{[{[]{()[[[]") == expected
+
+    expected = "])}>"
+    assert check("<{([{{}}[<[[[<>{}]]]>[]]") == expected
 
 
 def test_calculate() -> None:
-    assert score("}}]])})]") == 288957
-    assert score(")}>]})") == 5566
-    assert score("}}>}>))))") == 1480781
-    assert score("]]}}]}]}>") == 995444
-    assert score("])}>") == 294
+    expected: int
+
+    expected = 288957
+    assert score("}}]])})]") == expected
+
+    expected = 5566
+    assert score(")}>]})") == expected
+
+    expected = 1480781
+    assert score("}}>}>))))") == expected
+
+    expected = 995444
+    assert score("]]}}]}]}>") == expected
+
+    expected = 294
+    assert score("])}>") == expected
 
 
 def test_analyze() -> None:

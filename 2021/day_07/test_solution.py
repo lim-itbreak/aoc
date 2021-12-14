@@ -9,14 +9,28 @@ def test_load_input() -> None:
 
 
 def test_part1() -> None:
-    output: List[int] = fuel(example)
-    assert output[2] == 37 == min(output)
-    assert output[1] == 41
-    assert output[3] == 39
-    assert output[10] == 71
+    consumption: List[int] = fuel(example)
+    expected: int
+
+    expected = 37
+    assert consumption[2] == expected == min(consumption)
+
+    expected = 41
+    assert consumption[1] == expected
+
+    expected = 39
+    assert consumption[3] == expected
+
+    expected = 71
+    assert consumption[10] == expected
 
 
 def test_part2() -> None:
-    output: List[int] = fuel(example, constant_burn=False)
-    assert output[5] == 168 == min(output)
-    assert output[2] == 206
+    consumption: List[int] = fuel(example, constant_burn=False)
+    expected: int
+
+    expected = 168
+    assert consumption[5] == expected == min(consumption)
+
+    expected = 206
+    assert consumption[2] == expected

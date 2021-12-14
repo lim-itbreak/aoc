@@ -23,8 +23,10 @@ def test_load_input() -> None:
 
 def test_step() -> None:
     octopuses: Input = deepcopy(example)
+    expected: Input
+
     step(octopuses)
-    assert octopuses == [
+    expected = [
         [6, 5, 9, 4, 2, 5, 4, 3, 3, 4],
         [3, 8, 5, 6, 9, 6, 5, 8, 2, 2],
         [6, 3, 7, 5, 6, 6, 7, 2, 8, 4],
@@ -36,8 +38,10 @@ def test_step() -> None:
         [5, 9, 5, 7, 9, 5, 9, 6, 6, 5],
         [6, 3, 9, 4, 8, 6, 2, 6, 3, 7],
     ]
+    assert octopuses == expected
+
     step(octopuses)
-    assert octopuses == [
+    expected = [
         [8, 8, 0, 7, 4, 7, 6, 5, 5, 5],
         [5, 0, 8, 9, 0, 8, 7, 0, 5, 4],
         [8, 5, 9, 7, 8, 8, 9, 6, 0, 8],
@@ -49,8 +53,10 @@ def test_step() -> None:
         [9, 0, 0, 0, 0, 0, 0, 8, 7, 6],
         [8, 7, 0, 0, 0, 0, 6, 8, 4, 8],
     ]
+    assert octopuses == expected
+
     step(octopuses)
-    assert octopuses == [
+    expected = [
         [0, 0, 5, 0, 9, 0, 0, 8, 6, 6],
         [8, 5, 0, 0, 8, 0, 0, 5, 7, 5],
         [9, 9, 0, 0, 0, 0, 0, 0, 3, 9],
@@ -62,6 +68,7 @@ def test_step() -> None:
         [0, 4, 2, 1, 1, 2, 5, 0, 0, 0],
         [0, 0, 2, 1, 1, 1, 9, 0, 0, 0],
     ]
+    assert octopuses == expected
 
 
 def test_part1() -> None:

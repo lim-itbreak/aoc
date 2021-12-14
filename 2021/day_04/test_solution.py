@@ -142,6 +142,11 @@ def test_score() -> None:
 
 
 def test_play() -> None:
+    expected: int
     scores: List[int] = play(example)
-    assert scores[0] == 4512
-    assert scores[-1] == 1924
+
+    expected = 4512
+    assert scores[0] == expected
+
+    expected = 1924
+    assert scores[-1] == expected
