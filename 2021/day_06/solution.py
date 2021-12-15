@@ -22,7 +22,7 @@ def lantern_fish(timers: Input, days: int) -> int:
         day_out[6] += new
         day_out[8] = new
         day_in = day_out
-    return sum(day_in[timer] for timer in day_in)
+    return day_in.total()  # type: ignore
 
 
 def part1(inputs: Input):
