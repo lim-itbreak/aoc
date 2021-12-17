@@ -1,6 +1,6 @@
 from heapq import heappop, heappush
 from sys import maxsize
-from typing import List, TextIO, Tuple
+from typing import List, Set, TextIO, Tuple
 
 Input = List[int]
 
@@ -68,19 +68,26 @@ def a_star(risk):
     d: List[Tuple[int, int]] = []
     heappush(d, (f[0], 0))
 
+    e: Set[int] = set()
+    e.add(0)
+
     while d:
         _: int
         pos: int
         _, pos = heappop(d)
         if pos == len(risk) - 1:
             return g[pos]
+        e.remove(pos)
+
         loc: int
         for loc in neighbors(pos):
             _risk_: int = g[pos] + risk[loc]
             if _risk_ < g[loc]:
                 g[loc] = _risk_
                 f[loc] = g[loc] + h(loc)
-                heappush(d, (f[loc], loc))
+                if loc not in e:
+                    heappush(d, (f[loc], loc))
+                    e.add(loc)
 
 
 if __name__ == "__main__":
