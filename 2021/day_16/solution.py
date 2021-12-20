@@ -48,17 +48,7 @@ def read_packet(data: str, bit: int, packets: List[Packet]) -> int:
     if packet.type_id == 4:
         bit = read_literal(data, bit, packet)
     else:
-        match data[bit]:
-            case "0":
-                i_stop = bit + 16 + int(data[bit + 1 : bit + 16], 2)
-                bit += 16
-                while bit < i_stop:
-                    bit = read_packet(data, bit, packet.packets)
-            case "1":
-                n_packets = int(data[bit + 1 : bit + 12], 2)
-                bit += 12
-                for _ in range(n_packets):
-                    bit = read_packet(data, bit, packet.packets)
+        bit = read_operator(data, bit, packet)
     packets.append(packet)
     return bit
 
@@ -72,6 +62,21 @@ def read_literal(data: str, bit: int, packet: Packet) -> int:
         bit += 5
     packet.literal = int("".join(literal), 2)
     return bit + 5
+
+
+def read_operator(data: str, bit: int, packet: Packet) -> int:
+    match data[bit]:
+        case "0":
+            i_stop = bit + 16 + int(data[bit + 1 : bit + 16], 2)
+            bit += 16
+            while bit < i_stop:
+                bit = read_packet(data, bit, packet.packets)
+        case "1":
+            n_packets = int(data[bit + 1 : bit + 12], 2)
+            bit += 12
+            for _ in range(n_packets):
+                bit = read_packet(data, bit, packet.packets)
+    return bit
 
 
 def decode(transmission: Input) -> Packet:
